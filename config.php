@@ -1,50 +1,59 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "root";
-$dbname = "doku";
 
-$conn = NULL;
-function doku_setup() 
+class Config
 {
-	// Create connection
-	global $conn, $servername, $username, $password, $dbname;
-	$conn = new mysqli($servername, $username, $password);
-	
-	// Check connection
-	if ($conn->connect_error) {
-	    die("Connection failed: " . $conn->connect_error);
-	} 
+	private $serverName = "localhost";
+	private $username = "root";
+	private $password = "root";
+	private $dbName = "doku";
+	private $conn;
 
-	// Create database
-	$createdb = "CREATE DATABASE IF NOT EXISTS $dbname";
-	if  ($conn->query($createdb) !== TRUE) {
-		echo 'error occured<br>';
-		return;
+	public function __construct()
+	{
+		$this->conn = new mysqli($this->serverName, $this->username, $this->password);
+
+		if ($this->conn->connect_error)
+	    	die("Connection failed: " . $conn->connect_error);
 	}
-	
-	$conn->query("USE $dbname");
-	
-	$createtb  = "CREATE TABLE IF NOT EXISTS books (
-	id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-	docname VARCHAR(40) NOT NULL,
-	title VARCHAR(30) NOT NULL,
-	pagenum INT(10) UNSIGNED
-	)";
-	
-	if  ($conn->query($createtb) !== TRUE) {
-		echo 'error occured in table';
+
+	public function getConnection()
+	{
+		$this->conn->query("USE $this->dbName");
+		return $this->conn;
 	}
+
+	public function createDB()
+	{
+		$createdb = "CREATE DATABASE IF NOT EXISTS $this->dbName";
+		if($this->conn->query($createdb) !== TRUE) 
+		{
+			echo 'error occured<br>';
+			return;
+		}
+	}
+
+	public function createBooksTable()
+	{
+		$this->conn->query("USE $this->dbName");
+
+		$createtb  = "CREATE TABLE IF NOT EXISTS books (
+		id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+		docname VARCHAR(40) NOT NULL,
+		title VARCHAR(30) NOT NULL,
+		pagenum INT(10) UNSIGNED
+		)";
 	
-	
+		if($this->conn->query($createtb) !== TRUE)
+		{
+			echo 'error occured in table';
+			return;
+		}
+	}
+
+	public function __destruct()
+	{
+		$this->conn->close();
+	}
 }
-
-
-function doku_end()
-{
-	global $conn;
-	$conn->close();
-}
-
 
 ?>
