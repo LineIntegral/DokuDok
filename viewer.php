@@ -1,11 +1,11 @@
 <?php
-
+//need to work on it
 include('image.php');
 
 class Viewer
 {
 	private $IMGMaker;
-	private $currentPageN;
+	public static $currentPageN;
 	private $pdfName;
 
 	public function __construct($pdfName, $currentPageN)
@@ -25,6 +25,11 @@ class Viewer
 		return $this->IMGMaker->makeIMG($this->currentPageN++);
 	}
 
+	public function previousPageN()
+	{
+		return $this->IMGMaker->makeIMG(--$this->currentPageN);
+	}
+
 	public function getCurrentPage()
 	{
 		return $this->currentPageN;
@@ -32,14 +37,28 @@ class Viewer
 
 }
 
-if($_POST['next'])
+if(isset($_POST['next']))
 {
-	$viewer = new Viewer("x.pdf", $_POST['pageNo']);
+	$viewer = new Viewer("books/x.pdf", $_POST['pageNo']);
 	$x = $viewer->nextPageN();
 	echo '<center><img src='.$x.' width="500" height="500" >';
 	echo '<br/><br/>';
 	echo '<form action="" method="post">';
-	echo '<input type="text" name="pageNo" value='.$viewer->getCurrentPage().'>';
+	echo '<input type="hidden" name="pageNo" value='.$viewer->getCurrentPage().'>';
+	echo '<input type="submit" name="previous" value="Previous">';
+	echo '<input type="submit" name="next" value="Next">';
+	echo '</form></center>';
+}
+elseif(isset($_POST['previous']))
+{
+	Viewer::$currentPageN = $_POST['pageNo']-1;
+	$viewer = new Viewer("books/x.pdf", Viewer::$currentPageN);
+	$x = $viewer->previousPageN();
+	echo '<center><img src='.$x.' width="500" height="500" >';
+	echo '<br/><br/>';
+	echo '<form action="" method="post">';
+	echo '<input type="hidden" name="pageNo" value='.Viewer::$currentPageN.'>';
+	echo '<input type="submit" name="previous" value="Previous">';
 	echo '<input type="submit" name="next" value="Next">';
 	echo '</form></center>';
 }
@@ -47,8 +66,8 @@ else
 {
 	echo '<center>';
 	echo '<form action="" method="post">';
-	echo 'Page : <input type="text" size="5" name="pageNo" value="0">';
-	echo '<input type="submit" name="next" value="Next">';
+	echo '<input type="hidden" size="5" name="pageNo" value="0">';
+	echo '<input type="submit" name="next" value="Start Reading">';
 	echo '</form></center>';
 }
 
