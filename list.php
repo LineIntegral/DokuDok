@@ -27,8 +27,8 @@ class BookList
 	
 	public function saveList()
 	{
-		removeOlds();
-		addNews();
+		$this->removeOlds();
+		$this->addNews();
 	}
 	
 	private function removeOlds()
@@ -39,14 +39,20 @@ class BookList
 		$sql = "SELECT docname from books";
 		$result = $conn->query($sql);
 		
-		if ($result->num_rows > 0) {
+		if ($result->num_rows > 0) 
+		{
 			# code...
-			while ($row = $result->fetch_assoc()) {
-				echo  $row['docname'];
+			while ($row = $result->fetch_assoc()) 
+			{
 				if (!in_array($row["docname"], $this->fileArray))
-					echo  $row['docname'];
-						
-					//$conn->query("DELETE FROM books WHERE docname=$row['docname']");
+				{
+					$delSql = "DELETE FROM books WHERE docname='".$row['docname']."'";
+
+					if($conn->query($delSql) === TRUE)
+						echo "Deleted : ".$row["docname"]."<br>";
+					else
+						echo "Error : ".$row["docname"]."<br>";
+				}
 			}
 		}
 	}
@@ -71,15 +77,14 @@ class BookList
 		}
 		
 		//$book = new Document($this->path, "can.pdf", "can");
-		$book->save();
+		//$book->save();
 	}
 	
 	
 }
 
-$list = new BookList("../../");
+$list = new BookList("books/");
 //$files = $list->makeList(".");
 //echo"<pre>";print_r($list->getFileArray());echo"</pre>";
-$list->addNews();
-
+$list->saveList();
 ?>
