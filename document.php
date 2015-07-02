@@ -41,6 +41,13 @@ class Document
 			echo 'sometning bad happened';
 		
 	}
+	
+	public function totalNumber()
+	{
+		$pdftext = file_get_contents($this->pdfName);
+  		$num = preg_match_all("/\/Page\W/", $pdftext, $dummy);
+  		return $num;
+	}
 }
 
 $d = new Document("Kappa", "Keepo", 666);
