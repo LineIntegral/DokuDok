@@ -7,6 +7,7 @@ class AdminUser
 
 	private $username;
 	private $password;
+	private $path;
 
 	public function getAPassword()
 	{
@@ -42,10 +43,17 @@ class AdminUser
 			echo 'user cannot add to databse';
 		
 	}
+	
+	public function setPath($path)
+	{
+		$this->path = $path;
+	}
+	
+	public function getPath() { return $this->path; }
 
 }
 
-$myadmin = new AdminUser;
+$myadmin = new AdminUser();
 $myadmin->setAUserName("alper");
 $myadmin->setAPassword("7896");
 	
