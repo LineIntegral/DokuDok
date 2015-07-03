@@ -39,12 +39,13 @@ class Viewer
 
 if(isset($_POST['next']))
 {
-	$viewer = new Viewer("books/x.pdf", $_POST['pageNo']);
+	$viewer = new Viewer("books/".$_POST['bookName'], $_POST['pageNo']);
 	$x = $viewer->nextPageN();
 	echo '<center><img src='.$x.' width="500" height="500" >';
 	echo '<br/><br/>';
 	echo '<form action="" method="post">';
 	echo '<input type="hidden" name="pageNo" value='.$viewer->getCurrentPage().'>';
+	echo '<input type="hidden" name="bookName" value='.$_POST['bookName'].'>';
 	echo '<input type="submit" name="previous" value="Previous">';
 	echo '<input type="submit" name="next" value="Next">';
 	echo '</form></center>';
@@ -58,6 +59,7 @@ elseif(isset($_POST['previous']))
 	echo '<br/><br/>';
 	echo '<form action="" method="post">';
 	echo '<input type="hidden" name="pageNo" value='.Viewer::$currentPageN.'>';
+	echo '<input type="hidden" name="bookName" value='.$_POST['bookName'].'>';
 	echo '<input type="submit" name="previous" value="Previous">';
 	echo '<input type="submit" name="next" value="Next">';
 	echo '</form></center>';
@@ -67,6 +69,7 @@ else
 	echo '<center>';
 	echo '<form action="" method="post">';
 	echo '<input type="hidden" size="5" name="pageNo" value="0">';
+	echo '<input type="text" size="5" name="bookName">';
 	echo '<input type="submit" name="next" value="Start Reading">';
 	echo '</form></center>';
 }
