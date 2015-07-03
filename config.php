@@ -76,7 +76,8 @@ class Config
 		$createtb  = "CREATE TABLE IF NOT EXISTS admin (
 		id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 		username VARCHAR(15) NOT NULL,	
-		password VARCHAR(8) NOT NULL
+		password VARCHAR(8) NOT NULL,
+		pathname VARCHAR(200) NOT NULL
 		)";
 		
 		if($this->conn->query($createtb) !== TRUE)
