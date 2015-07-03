@@ -56,7 +56,8 @@ class AdminUser
 $myadmin = new AdminUser();
 $myadmin->setAUserName("alper");
 $myadmin->setAPassword("7896");
-	
+
+
 echo $myadmin->getAUserName();
 echo $myadmin->getAPassword();
 
