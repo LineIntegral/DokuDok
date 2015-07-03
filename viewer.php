@@ -46,21 +46,21 @@ if(isset($_POST['next']))
 	echo '<form action="" method="post">';
 	echo '<input type="hidden" name="pageNo" value='.$viewer->getCurrentPage().'>';
 	echo '<input type="hidden" name="bookName" value='.$_POST['bookName'].'>';
-	echo '<input type="submit" name="previous" value="Previous">';
+	if($viewer->getCurrentPage() > 1) echo '<input type="submit" name="previous" value="Previous">';
 	echo '<input type="submit" name="next" value="Next">';
 	echo '</form></center>';
 }
 elseif(isset($_POST['previous']))
 {
 	Viewer::$currentPageN = $_POST['pageNo']-1;
-	$viewer = new Viewer("books/x.pdf", Viewer::$currentPageN);
+	$viewer = new Viewer("books/".$_POST['bookName'], Viewer::$currentPageN);
 	$x = $viewer->previousPageN();
 	echo '<center><img src='.$x.' width="500" height="500" >';
 	echo '<br/><br/>';
 	echo '<form action="" method="post">';
 	echo '<input type="hidden" name="pageNo" value='.Viewer::$currentPageN.'>';
 	echo '<input type="hidden" name="bookName" value='.$_POST['bookName'].'>';
-	echo '<input type="submit" name="previous" value="Previous">';
+	if($viewer->getCurrentPage() > 1) echo '<input type="submit" name="previous" value="Previous">';
 	echo '<input type="submit" name="next" value="Next">';
 	echo '</form></center>';
 }
