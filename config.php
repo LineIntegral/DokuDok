@@ -27,7 +27,7 @@ class Config
 		$createdb = "CREATE DATABASE IF NOT EXISTS $this->dbName";
 		if($this->conn->query($createdb) !== TRUE) 
 		{
-			echo 'error occured<br>';
+			echo 'error occured in db creation<br>';
 			return;
 		}
 	}
@@ -49,11 +49,54 @@ class Config
 			return;
 		}
 	}
+	
+	public function createUserTable()
+	{	
+		
+		$this->conn->query("USE $this->dbName");
+
+		$createtb  = "CREATE TABLE IF NOT EXISTS users (
+		id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,	
+		password VARCHAR(8) NOT NULL
+		)";
+		
+		if($this->conn->query($createtb) !== TRUE)
+		{
+			//echo 'error occured in user table';
+			return;
+		}
+		
+	}
+	
+	public function createAdminTable()
+	{	
+		
+		$this->conn->query("USE $this->dbName");
+
+		$createtb  = "CREATE TABLE IF NOT EXISTS admin (
+		id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+		username VARCHAR(15) NOT NULL,	
+		password VARCHAR(8) NOT NULL
+		)";
+		
+		if($this->conn->query($createtb) !== TRUE)
+		{
+			//echo 'error occured in user table';
+			return;
+		}
+		
+	}
 
 	public function __destruct()
 	{
 		$this->conn->close();
 	}
 }
+
+$myconf = new Config();
+$myconf->createDB();
+$myconf->createUserTable();
+$myconf->createBooksTable();
+$myconf->createAdminTable();
 
 ?>
