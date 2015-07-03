@@ -2,11 +2,11 @@
 include_once("list.php");
 
 $lst = new BookList("../../");
-echo 'here';
+//echo 'here';
 function list_docs()
 {
 	global $lst;
-	echo 'there';
+	//echo 'there';
 	return $lst->getFileList();
 }
 

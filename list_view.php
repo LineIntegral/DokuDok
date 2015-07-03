@@ -6,7 +6,7 @@ $link_list = "";
 $id = 0;
 foreach (list_docs() as $doc) {
 	# code...
-	$current_html = "<input type='radio' name='docname' >$doc<br>";
+	$current_html = "<input type='radio' name='docname' value='$doc'>$doc<br>";
 	$link_list.=$current_html;
 }
 
