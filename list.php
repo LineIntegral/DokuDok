@@ -13,6 +13,24 @@ class BookList
 	
 	public function getFileArray() { return $this->fileArray; }
 	
+	public function getFileList()
+	{
+		$query = "SELECT title from books";
+		$conf = new Config();
+		$result = $conf->getConnection()->query($query);
+		//print_r($result);
+		$lst = array();
+		if ($result->num_rows > 0) 
+		{
+			while ($row = $result->fetch_assoc()) 
+			{
+				array_push($lst, $row["title"]);	
+			}
+		}
+		return $lst;
+	}
+	
+	
 	public function makeList()
 	{
 		$files = scandir($this->path);
@@ -60,7 +78,7 @@ class BookList
 	public function addNews()
 	{
 		//echo $this->path;
-		print_r($this->fileArray);
+		//print_r($this->fileArray);
 		foreach ($this->fileArray as $file) {
 			# code...
 			//echo 'girdi';
@@ -70,8 +88,8 @@ class BookList
 			
 			$book = new Document($this->path,$file, $title);
 			
-			echo "<br>";
-			echo $book->getPageNum();
+			//secho "<br>";
+			//echo $book->getPageNum();
 			
 			$book->save();
 		}
@@ -83,8 +101,11 @@ class BookList
 	
 }
 
-$list = new BookList("books/");
+//$list = new BookList("../../");
 //$files = $list->makeList(".");
 //echo"<pre>";print_r($list->getFileArray());echo"</pre>";
-$list->saveList();
+//$list->saveList();
+//echo 'passed line 105';
+//print_r($list->getFileList());
+//echo 'passed line 107';
 ?>
