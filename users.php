@@ -1,8 +1,8 @@
 <?php
 
-include('config.php');
+include_once('config.php');
 
-
+$tst = 'can';
 class User
 {
 	private $password;
@@ -64,14 +64,16 @@ class User
 
 	public static function deleteUser($passwd)
 	{
+		
 		$config = new Config();
 		$conn = $config->getConnection();
-
+		echo '1';
 		// sql to delete a record
 		$sql = "DELETE FROM users WHERE password='$passwd'";
-
+		echo '2';
 		if (mysqli_query($conn, $sql)) {
 		   // echo "Record deleted successfully";
+		   echo '3';
 		} else {
 		    echo "Error deleting record: " . mysqli_error($conn);
 		}
@@ -103,6 +105,8 @@ class User
 
 }
 	
+//echo 'eheh';
+//User::deleteUser("nQrMZmhe");
 
 	/*
 	if( isset( $_POST['create'] )){

@@ -1,11 +1,22 @@
 <?php
 include_once("list_controller.php");
 include_once("client_functions.php");
-include_once('deleter.php');
+include_once("deleter.php");
+include_once("users.php");
+//("users.php");
 //echo 'something good';
 //session_start();
 
-if (isset($_POST['lout'])) logout();
+if (isset($_POST['lout'])){
+	session_start();
+	//echo $_SESSION['password'];
+	echo $tst;
+	User::deleteUser($_SESSION['password']);
+	echo 'passed';
+	 logout();
+	 
+	 direct('google.com');
+}
 list_verify();
 
 $link_list = "";
