@@ -114,16 +114,25 @@ class User
 		$userM->userInfo();
 	}
 	
-	
 	if( isset( $_POST['pass'] )){
+		session_start();
+		$_SESSION['password'] = $_POST['pass'];
+		
 		$logUser = new User();
 		$givenp = $_POST['pass'];
 		if($logUser->searchUser($givenp)==true){
-			echo "LOGGED IN";
+			echo "LOGGED IN   ";
 			$logUser->deleteUser($givenp);
+			echo '<meta http-equiv="refresh" content="3;URL=start.php">';
+			
+			//header("refresh:3;url=start.php");
+			//die('THE ENJOYING WAY FOR READING ');
+			
 		}
 		else{
-			echo "ACCESS DENIED";
+			echo "ACCESS DENIED   ";
+			echo '<meta http-equiv="refresh" content="3;URL=login.html">';
+			//die('THE ENJOYING WAY FOR READING ');
 		}
 	}	
 
