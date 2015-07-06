@@ -62,7 +62,7 @@ class User
 	}
 
 
-	public function deleteUser($passwd)
+	public static function deleteUser($passwd)
 	{
 		$config = new Config();
 		$conn = $config->getConnection();
@@ -79,7 +79,7 @@ class User
 	}
 
 
-	public function searchUser($passwd)
+	public static function searchUser($passwd)
 	{
 		$config = new Config();
 		$conn = $config->getConnection();
@@ -95,10 +95,8 @@ class User
 		   			return true;
 		   		}
 		    }
-		} else {
-		    echo "0 results";
-		}
-
+		} 
+		return false;
 
 
 	}
@@ -106,34 +104,38 @@ class User
 }
 	
 
+	/*
 	if( isset( $_POST['create'] )){
-
-		$userM = new User();
-		$userM->setPassword();
-		$userM->save();
-		$userM->userInfo();
-	}
 	
-	if( isset( $_POST['pass'] )){
-		session_start();
-		$_SESSION['password'] = $_POST['pass'];
+			$userM = new User();
+			$userM->setPassword();
+			$userM->save();
+			$userM->userInfo();
+		}
 		
-		$logUser = new User();
-		$givenp = $_POST['pass'];
-		if($logUser->searchUser($givenp)==true){
-			echo "LOGGED IN   ";
-			$logUser->deleteUser($givenp);
-			echo '<meta http-equiv="refresh" content="3;URL=start.php">';
+		if( isset( $_POST['pass'] )){
+			session_start();
+			$_SESSION['password'] = $_POST['pass'];
+			$_SESSION['creation'] = time();
 			
-			//header("refresh:3;url=start.php");
-			//die('THE ENJOYING WAY FOR READING ');
-			
-		}
-		else{
-			echo "ACCESS DENIED   ";
-			echo '<meta http-equiv="refresh" content="3;URL=login.html">';
-			//die('THE ENJOYING WAY FOR READING ');
-		}
-	}	
+			$logUser = new User();
+			$givenp = $_POST['pass'];
+			if($logUser->searchUser($givenp)==true){
+				
+				echo "LOGGED IN   ";
+				//$logUser->deleteUser($givenp);
+				echo '<meta http-equiv="refresh" content="3;URL=list_view.php">';
+				
+				//header("refresh:3;url=start.php");
+				//die('THE ENJOYING WAY FOR READING ');
+				
+			}
+			else{
+				echo "ACCESS DENIED   ";
+				echo '<meta http-equiv="refresh" content="3;URL=login.php">';
+				//die('THE ENJOYING WAY FOR READING ');
+			}
+		}	*/
+	
 
 ?>

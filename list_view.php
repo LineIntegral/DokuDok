@@ -1,8 +1,11 @@
 <?php
 include_once("list_controller.php");
+include_once("client_functions.php");
+//echo 'something good';
+
+list_verify();
 
 $link_list = "";
-
 $id = 0;
 foreach (list_docs() as $doc) {
 	# code...
@@ -13,6 +16,10 @@ foreach (list_docs() as $doc) {
 echo "<form action='viewer.php' method='post' accept-charset='utf-8'>
 		$link_list
 <input type='submit' name='doc_form' value='Ok'>
-</form>"
+</form>";
+
+echo "<form action='' method='post'>
+	<input type='submit' name='logout' value='logout'>
+	</form>";
 
 ?>

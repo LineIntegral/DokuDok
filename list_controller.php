@@ -1,5 +1,9 @@
 <?php
+
 include_once("list.php");
+//echo 'hello';
+include_once("client_functions.php");
+//echo 'hello';
 
 $lst = new BookList("../../");
 //echo 'here';
@@ -10,24 +14,13 @@ function list_docs()
 	return $lst->getFileList();
 }
 
-function init_list()
+function list_verify()
 {
-	session_start();
-	 echo 'your session is' . $_SESSION['password'];
-  
-	  if( isset( $_SESSION['password'] )){
-
-	  //echo 	'<img src="book.jpg" alt="Book" height="1000" width="1000">';
- 
-	  	//session_destroy();
-		//echo '<meta http-equiv="refresh" content="3;URL=login.html">';
-		//die('THE ENJOYING WAY FOR READING ');
-		return TRUE;
-	  }
-	  else{
-	  	echo "YOUR SESSION END ";
-		return FALSE;
-	  }	
+	if (logged_in() != TRUE) {
+		echo 'You are not logged in';
+		direct('login.php');
+		//echo 'hih';
+	}
 }
 
 //print_r( list_docs() );
