@@ -1,8 +1,11 @@
 <?php
 include_once("list_controller.php");
 include_once("client_functions.php");
+include_once('deleter.php');
 //echo 'something good';
+//session_start();
 
+if (isset($_POST['lout'])) logout();
 list_verify();
 
 $link_list = "";
@@ -19,7 +22,7 @@ echo "<form action='viewer.php' method='post' accept-charset='utf-8'>
 </form>";
 
 echo "<form action='' method='post'>
-	<input type='submit' name='logout' value='logout'>
+	<input type='submit' name='lout' value='logout'>
 	</form>";
-
+//logout();
 ?>
