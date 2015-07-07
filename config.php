@@ -94,10 +94,6 @@ class Config
 	}
 }
 
-$myconf = new Config();
-$myconf->createDB();
-$myconf->createUserTable();
-$myconf->createBooksTable();
-$myconf->createAdminTable();
+
 
 ?>
