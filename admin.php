@@ -1,4 +1,8 @@
 <?php
+
+if(file_exists("install.php"))
+	unlink("install.php");
+
 include_once("users.php");
 if( isset( $_POST['create'] )){
 	echo 'mnk';
