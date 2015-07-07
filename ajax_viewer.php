@@ -2,7 +2,6 @@
 include_once('image.php');
 include_once('config.php');
 include_once('client_functions.php');
-//include_once('viewer.php');
 
 if(logged_in() == FALSE)
 {
@@ -13,7 +12,6 @@ if(logged_in() == FALSE)
 
 <script>
 
-//page = 0;
 var xmlhttp = new XMLHttpRequest();
 
 function load()
@@ -46,7 +44,6 @@ function send(inc)
 	
 }
 
-//var snd = send();
 load();
 function loadNext()
 {
@@ -58,7 +55,6 @@ function loadPrev()
 {
 	send(function(a) {return a - 1;});
 }
-//document.writle(page);
 
 </script>
 <div id="test"></div>
