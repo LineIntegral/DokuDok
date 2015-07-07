@@ -12,29 +12,28 @@ function create_user()
 /*
 recieves and checks post data, start a admin session if value
 */
-function verify_admin($un='username', $pw='password')
+function verify_admin()
 {
-	echo $_POST[$un].$_POST[$pw];
-	$something = new Config();
-	$conn = $something->getConnection();
-	$query = "SELECT * FROM admin
-		 WHERE username = '$_POST[$un]'
-		 AND password = '$_POST[$pw]'";
-		 echo $query;
-	$result = mysql_query("SELECT * FROM admin
-		 WHERE username = $_POST[$un]
-		 AND password = $_POST[$pw]");
-		 //echo $result;
-	if($result->num_rows == 0) {
-	    //do nothing
-		echo 'failed';
-		
-	} else {
-	    session_start();
-		$_SESSION['username'] = $_POST[$un];
-		$_SESSION['password'] = $_POST[$pw];
-		echo 'successful';
-	}	
+	$config = new Config();
+	$conn = $config->getConnection();
+
+	$query = "SELECT username,password from admin";
+	$result = $conn->query($query);
+
+	if($result->num_rows > 0)
+	{
+		while ($row = $result->fetch_assoc())
+		{
+			if($_POST['username'] == $row['username'] && $_POST['password'] == $row['password'])
+			{
+				session_start();
+				$_SESSION['username'] = $_POST['username'];
+				$_SESSION['password'] = $_POST['password'];
+				return TRUE;
+			}
+		}
+	}
+	return FALSE;
 }
 
 /*check whether there is an admin session*/
