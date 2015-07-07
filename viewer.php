@@ -1,7 +1,9 @@
 <?php
 //need to work on it
-include('image.php');
-include('config.php');
+include_once('image.php');
+include_once('config.php');
+
+echo "aaa";
 
 class Viewer
 {
@@ -54,6 +56,9 @@ class Viewer
 
 }
 
+echo $_POST['docname'];
+
+
 if(isset($_POST['next']))
 {
 	$viewer = new Viewer("books/".Viewer::titleToDocName($_POST['bookName']), $_POST['pageNo']);
@@ -81,7 +86,7 @@ elseif(isset($_POST['previous']))
 	echo '<input type="submit" name="next" value="Next">';
 	echo '</form></center>';
 }
-elseif(isset($_POST['docname']))
+elseif(isset($_POST['doc_form']))
 {
 	$viewer = new Viewer("books/".Viewer::titleToDocName($_POST['docname']), 0);
 	$x = $viewer->nextPageN();
@@ -94,5 +99,6 @@ elseif(isset($_POST['docname']))
 	echo '<input type="submit" name="next" value="Next">';
 	echo '</form></center>';
 }
+
 
 ?>

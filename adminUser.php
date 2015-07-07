@@ -1,5 +1,5 @@
 <?php
-include('config.php');
+include_once('config.php');
 
 
 class AdminUser
@@ -7,7 +7,7 @@ class AdminUser
 
 	private $username;
 	private $password;
-	private $path;
+	private $pathname;
 
 	public function getAPassword()
 	{
@@ -36,30 +36,22 @@ class AdminUser
 	{
 		$config = new Config();
 		$conn = $config->getConnection();
-		$query = "INSERT INTO admin (username,password)
-				VALUES ('$this->username','$this->password')";
+		$query = "INSERT INTO admin (username,password,pathname)
+				VALUES ('$this->username','$this->password', '$this->pathname')";
 
 		if ($conn->query($query) !== TRUE)
 			echo 'user cannot add to databse';
 		
 	}
 	
-	public function setPath($path)
+	public function setPath($pathname)
 	{
-		$this->path = $path;
+		$this->pathname = $pathname;
 	}
 	
-	public function getPath() { return $this->path; }
+	public function getPath() { return $this->pathname; }
 
 }
 
-$myadmin = new AdminUser();
-$myadmin->setAUserName("alper");
-$myadmin->setAPassword("7896");
 
-
-echo $myadmin->getAUserName();
-echo $myadmin->getAPassword();
-
-$myadmin->save();
 ?>

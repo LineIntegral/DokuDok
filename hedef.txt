@@ -1,8 +1,0 @@
-Pazartesi gunu bitirilmesi gerekenler
---------------------------------------
-
--Admin paneli olusturulcak
--viewer'a global path gomulcek
--kullanici login sistemi oturtulcak(session vb dahil)
--viewer ajaxli yapilcak
--css'i de aksam biri giydirsin.
