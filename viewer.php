@@ -60,7 +60,7 @@ class Viewer
 
 }
 
-echo $_POST['docname'];
+//echo $_POST['docname'];
 
 
 if(isset($_POST['next']))
@@ -106,6 +106,18 @@ elseif(isset($_POST['doc_form']))
 else
 {
 	direct('login.php', 0);
+}
+
+function display_form($viewer, $name)
+{
+	echo '<center><img src='.$x.' width="500" height="500" >';
+	echo '<br/><br/>';
+	echo '<form action="" method="post">';
+	echo '<input type="hidden" name="pageNo" value='.$viewer->getCurrentPage().'>';
+	echo '<input type="hidden" name="bookName" value="'.$name.'">';
+	if($viewer->getCurrentPage() > 1) echo '<input type="submit" name="previous" value="Previous">';
+	echo '<input type="submit" name="next" value="Next">';
+	echo '</form></center>';
 }
 
 
