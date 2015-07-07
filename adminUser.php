@@ -50,6 +50,7 @@ class AdminUser
 	}
 	
 	public function getPath() { return $this->pathname; }
+	
 
 }
 

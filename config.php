@@ -85,7 +85,6 @@ class Config
 			//echo 'error occured in user table';
 			return;
 		}
-		
 	}
 
 	public function __destruct()
