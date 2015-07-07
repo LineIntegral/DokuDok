@@ -4,7 +4,7 @@ class Config
 {
 	private $serverName = "localhost";
 	private $username = "root";
-	private $password = "root";
+	private $password = "alpr";
 	private $dbName = "doku";
 	private $conn;
 
