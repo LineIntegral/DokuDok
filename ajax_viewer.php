@@ -16,15 +16,11 @@ var xmlhttp = new XMLHttpRequest();
 
 function load()
 {
-	
-	xmlhttp.onreadystatechange=function() 
-	{
+	xmlhttp.onreadystatechange=function() {
 	    if (xmlhttp.readyState==4 && xmlhttp.status==200)
-	    {
-			document.getElementById("docview").innerHTML=xmlhttp.responseText;
-			
-	    }
+			document.getElementById("docview").innerHTML = xmlhttp.responseText;
 	}
+	
 	xmlhttp.open("POST","view_img.php",true);
 	
 	xmlhttp.send();
@@ -38,17 +34,15 @@ function send(inc)
 	page = inc(page);
 	xmlhttp.open("POST","view_img.php",true);
 	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-	var pgstr = new String(page);
-	//document.getElementById("test").innerHTML = pgstr;
-	xmlhttp.send("pagenum="+pgstr);
+	xmlhttp.send("pagenum="+page);
 	
 }
 
 load();
+
 function loadNext()
 {
-	send(function(a) {return a + 1;});
-	
+	send(function(a) {return a + 1;});	
 }
 
 function loadPrev()
