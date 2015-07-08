@@ -1,6 +1,14 @@
 <?php
 
 include_once("config.php");
+include_once("users.php");
+
+function totalNumber($docname)
+{
+	$pdftext = file_get_contents($docname);
+		$num = preg_match_all("/\/Page\W/", $pdftext, $dummy);
+		return $num;
+}
 
 function logged_in() 
 {
@@ -10,7 +18,8 @@ function logged_in()
 	}
 	//echo 'girmedi';
 	if (isset($_SESSION['creation'])) {
-		if (time() - $_SESSION['creation'] > 60) {
+		if (time() - $_SESSION['creation'] > 180) {
+			User::deleteUser($_SESSION['password']);
 			return FALSE;
 		}
 	} else return FALSE;

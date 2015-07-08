@@ -5,7 +5,8 @@ include_once("list.php");
 include_once("client_functions.php");
 //echo 'hello';
 
-$lst = new BookList("../../");
+$lst = new BookList(get_pathname());
+
 //echo 'here';
 function list_docs()
 {
@@ -17,8 +18,8 @@ function list_docs()
 function list_verify()
 {
 	if (logged_in() != TRUE) {
-		echo 'You are not logged in';
-		direct('login.php');
+		//echo 'You are not logged in';
+		direct('login.php', 0);
 		//echo 'hih';
 	}
 }

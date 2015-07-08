@@ -77,35 +77,20 @@ class BookList
 	
 	public function addNews()
 	{
-		//echo $this->path;
-		//print_r($this->fileArray);
+
 		foreach ($this->fileArray as $file) {
-			# code...
-			//echo 'girdi';
+
 			$title = explode(".", $file)[0];
-			//$pgnum = $this->totalNumber();
-			//echo $file.'<br>';
+
 			
 			$book = new Document($this->path,$file, $title);
 			
-			//secho "<br>";
-			//echo $book->getPageNum();
 			
 			$book->save();
 		}
 		
-		//$book = new Document($this->path, "can.pdf", "can");
-		//$book->save();
 	}
 	
 	
 }
-
-//$list = new BookList("../../");
-//$files = $list->makeList(".");
-//echo"<pre>";print_r($list->getFileArray());echo"</pre>";
-//$list->saveList();
-//echo 'passed line 105';
-//print_r($list->getFileList());
-//echo 'passed line 107';
 ?>
