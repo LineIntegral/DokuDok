@@ -2,7 +2,6 @@
 
 include_once('config.php');
 
-$tst = 'can';
 class User
 {
 	private $password;
@@ -58,7 +57,7 @@ class User
 	public function userInfo()
 	{
 		$givenpass = $this->getPassword();
-		echo "User Password : $givenpass". "<br>";
+		return $givenpass;
 	}
 
 
@@ -67,13 +66,13 @@ class User
 		
 		$config = new Config();
 		$conn = $config->getConnection();
-		echo '1';
+		
 		// sql to delete a record
 		$sql = "DELETE FROM users WHERE password='$passwd'";
-		echo '2';
+		
 		if (mysqli_query($conn, $sql)) {
 		   // echo "Record deleted successfully";
-		   echo '3';
+		   
 		} else {
 		    echo "Error deleting record: " . mysqli_error($conn);
 		}
@@ -104,42 +103,5 @@ class User
 	}
 
 }
-	
-//echo 'eheh';
-//User::deleteUser("nQrMZmhe");
-
-	/*
-	if( isset( $_POST['create'] )){
-	
-			$userM = new User();
-			$userM->setPassword();
-			$userM->save();
-			$userM->userInfo();
-		}
-		
-		if( isset( $_POST['pass'] )){
-			session_start();
-			$_SESSION['password'] = $_POST['pass'];
-			$_SESSION['creation'] = time();
-			
-			$logUser = new User();
-			$givenp = $_POST['pass'];
-			if($logUser->searchUser($givenp)==true){
-				
-				echo "LOGGED IN   ";
-				//$logUser->deleteUser($givenp);
-				echo '<meta http-equiv="refresh" content="3;URL=list_view.php">';
-				
-				//header("refresh:3;url=start.php");
-				//die('THE ENJOYING WAY FOR READING ');
-				
-			}
-			else{
-				echo "ACCESS DENIED   ";
-				echo '<meta http-equiv="refresh" content="3;URL=login.php">';
-				//die('THE ENJOYING WAY FOR READING ');
-			}
-		}	*/
-	
 
 ?>
