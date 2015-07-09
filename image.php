@@ -16,7 +16,8 @@ class PDFtoIMG
 	//Will Change
 	public function makeIMG($i)
 	{
-		$imgName = md5("ThUmB.".rand(rand(0,1000), rand(1001, 1000000)));
+		$imgName = "thumbs/";
+		$imgName .= md5("ThUmB.".rand(rand(0,1000), rand(1001, 1000000)));
 		$imgName .= ".png";
 
 		$this->image->setResolution(200,200);
