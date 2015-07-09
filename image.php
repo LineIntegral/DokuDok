@@ -16,6 +16,9 @@ class PDFtoIMG
 	//Will Change
 	public function makeIMG($i)
 	{
+		$imgName = md5("ThUmB.".rand(rand(0,1000), rand(1001, 1000000)));
+		$imgName .= ".png";
+
 		$this->image->setResolution(200,200);
 		$this->image->readImage($this->pdfName."[".$i."]");
 		$this->image->scaleImage(800,0);
@@ -23,9 +26,9 @@ class PDFtoIMG
 		$this->image->setCompressionQuality(95); 
 		$this->image = $this->image->flattenImages();
 		$this->image->setImageFormat("png");
-		$this->image->writeImage('thumb'.$i.'.png');
+		$this->image->writeImage($imgName);
 		
-		return "thumb".$i.".png";
+		return $imgName;
 	}
 
 	private function totalNumber()
